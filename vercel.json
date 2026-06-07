@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/google-api/:path*",
+      "destination": "https://clients5.google.com/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

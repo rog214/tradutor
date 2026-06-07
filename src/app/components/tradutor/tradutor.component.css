@@ -48,6 +48,9 @@
   border-left: 4px solid var(--cor-erro-borda);
   font-weight: 500;
   animation: slide-in 0.3s ease;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .area-traducao {
