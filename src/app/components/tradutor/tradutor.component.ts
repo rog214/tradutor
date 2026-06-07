@@ -5,11 +5,10 @@ import { TradutorService } from '../../services/tradutor.service';
 import { forkJoin, map } from 'rxjs';
 
 @Component({
-  selector: 'app-tradutor',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './tradutor.component.html',
-  styleUrls: ['./tradutor.component.css']
+    selector: 'app-tradutor',
+    imports: [CommonModule, FormsModule],
+    templateUrl: './tradutor.component.html',
+    styleUrls: ['./tradutor.component.css']
 })
 export class TradutorComponent {
   private tradutorService = inject(TradutorService);
