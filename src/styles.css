@@ -1,0 +1,84 @@
+:root {
+  --cor-fundo: #f0f4f8;
+  --cor-texto-primaria: #0f172a;
+  --cor-texto-secundaria: #475569;
+  --cor-primaria: #6366f1;
+  --cor-primaria-hover: #4f46e5;
+  --cor-primaria-transparente: rgba(99, 102, 241, 0.15);
+  --cor-secundaria: #e2e8f0;
+  --cor-secundaria-hover: #cbd5e1;
+  --cor-secundaria-texto: #334155;
+  --cor-erro-fundo: #fef2f2;
+  --cor-erro-texto: #b91c1c;
+  --cor-erro-borda: #f87171;
+  --cor-fundo-cartao: rgba(255, 255, 255, 0.85);
+  --cor-fundo-input: rgba(255, 255, 255, 0.9);
+  --cor-fundo-readonly: rgba(241, 245, 249, 0.6);
+  --cor-borda: #cbd5e1;
+  --cor-borda-foco: #6366f1;
+  --cor-desabilitado: #94a3b8;
+  --raio-borda: 16px;
+  --sombra-cartao: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  --sombra-input: inset 0 2px 4px 0 rgba(0,0,0,0.02);
+  --blur-fundo: blur(12px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cor-fundo: #09090b;
+    --cor-texto-primaria: #f8fafc;
+    --cor-texto-secundaria: #94a3b8;
+    --cor-primaria: #818cf8;
+    --cor-primaria-hover: #6366f1;
+    --cor-primaria-transparente: rgba(129, 140, 248, 0.15);
+    --cor-secundaria: #1e293b;
+    --cor-secundaria-hover: #334155;
+    --cor-secundaria-texto: #e2e8f0;
+    --cor-erro-fundo: #450a0a;
+    --cor-erro-texto: #fca5a5;
+    --cor-erro-borda: #ef4444;
+    --cor-fundo-cartao: rgba(24, 24, 27, 0.65);
+    --cor-fundo-input: rgba(39, 39, 42, 0.8);
+    --cor-fundo-readonly: rgba(24, 24, 27, 0.4);
+    --cor-borda: #3f3f46;
+    --cor-borda-foco: #818cf8;
+    --cor-desabilitado: #3f3f46;
+    --sombra-cartao: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--cor-fundo);
+  background-image: radial-gradient(circle at top right, var(--cor-primaria-transparente), transparent 400px);
+  background-attachment: fixed;
+  color: var(--cor-texto-primaria);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar Minimalista */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--cor-borda);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cor-texto-secundaria);
+}

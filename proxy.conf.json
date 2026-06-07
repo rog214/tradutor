@@ -1,0 +1,10 @@
+{
+  "/google-api": {
+    "target": "https://clients5.google.com",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/google-api": ""
+    }
+  }
+}

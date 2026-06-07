@@ -1,0 +1,90 @@
+<main class="container-principal">
+  <header class="cabecalho">
+    <div class="cabecalho-brand">
+      <span class="logo-icone">🌐</span>
+      <h1>Tradutor Simultâneo</h1>
+    </div>
+    <p>Traduza código formatado ou texto livre para Inglês e Espanhol</p>
+  </header>
+
+  <div *ngIf="mensagemSucesso" class="notificacao-sucesso">
+    ✓ {{ mensagemSucesso }}
+  </div>
+
+  <section *ngIf="mensagemErro" class="alerta-erro" role="alert">
+    {{ mensagemErro }}
+  </section>
+
+  <section class="area-traducao">
+    <div class="campo-texto origem">
+      <label for="entrada-pt"> <span class="fi fi-br"></span> Português </label>
+      <textarea
+        id="entrada-pt"
+        [(ngModel)]="textoOrigem"
+        placeholder="Digite o texto ou cole um objeto (ex: Chave: 'Valor',)..."
+        [disabled]="estaCarregando"
+        spellcheck="false"
+      ></textarea>
+
+      <div class="acoes">
+        <button
+          (click)="limpar()"
+          [disabled]="estaCarregando || (!textoOrigem && !textoIngles)"
+          class="botao-secundario"
+        >
+          Limpar
+        </button>
+        <button
+          (click)="traduzirTexto()"
+          [disabled]="estaCarregando || !textoOrigem.trim()"
+          class="botao-primario"
+        >
+          <span *ngIf="estaCarregando" class="indicador-carregamento"></span>
+          {{ estaCarregando ? "Traduzindo..." : "Traduzir" }}
+        </button>
+      </div>
+    </div>
+
+    <div class="divisor-vertical"></div>
+
+    <div class="resultados">
+      <div class="campo-texto">
+        <label for="saida-en"> <span class="fi fi-us"></span> Inglês </label>
+        <div class="textarea-container">
+          <textarea
+            id="saida-en"
+            [value]="textoIngles"
+            readonly
+            (click)="copiarTexto(textoIngles, 'en')"
+            placeholder="A tradução aparecerá aqui..."
+            [class.carregando]="estaCarregando"
+            [class.sucesso-borda]="areaCopiada === 'en'"
+            class="texto-copiavel"
+            spellcheck="false"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="campo-texto">
+        <label for="saida-es"> <span class="fi fi-es"></span> Espanhol </label>
+        <div class="textarea-container">
+          <textarea
+            id="saida-es"
+            [value]="textoEspanhol"
+            readonly
+            (click)="copiarTexto(textoEspanhol, 'es')"
+            placeholder="A tradução aparecerá aqui..."
+            [class.carregando]="estaCarregando"
+            [class.sucesso-borda]="areaCopiada === 'es'"
+            class="texto-copiavel"
+            spellcheck="false"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="rodape-resultados">
+    <small class="dica-copia">Clique nas traduções acima para copiar.</small>
+  </footer>
+</main>
