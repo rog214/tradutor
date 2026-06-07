@@ -7,13 +7,17 @@
     <p>Traduza código formatado ou texto livre para Inglês e Espanhol</p>
   </header>
 
-  <div *ngIf="mensagemSucesso" class="notificacao-sucesso">
-    ✓ {{ mensagemSucesso }}
-  </div>
+  @if (mensagemSucesso) {
+    <div class="notificacao-sucesso">
+      ✓ {{ mensagemSucesso }}
+    </div>
+  }
 
-  <section *ngIf="mensagemErro" class="alerta-erro" role="alert">
-    {{ mensagemErro }}
-  </section>
+  @if (mensagemErro) {
+    <section class="alerta-erro" role="alert">
+      {{ mensagemErro }}
+    </section>
+  }
 
   <section class="area-traducao">
     <div class="campo-texto origem">
@@ -39,7 +43,9 @@
           [disabled]="estaCarregando || !textoOrigem.trim()"
           class="botao-primario"
         >
-          <span *ngIf="estaCarregando" class="indicador-carregamento"></span>
+          @if (estaCarregando) {
+            <span class="indicador-carregamento"></span>
+          }
           {{ estaCarregando ? "Traduzindo..." : "Traduzir" }}
         </button>
       </div>
@@ -66,7 +72,12 @@
       </div>
 
       <div class="campo-texto">
-        <label for="saida-es"> <span class="fi fi-es"></span> Espanhol </label>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <label for="saida-es"> <span class="fi fi-es"></span> Espanhol </label>
+          @if (textoIngles || textoEspanhol) {
+            <small class="dica-animada">Clique nas traduções para copiar</small>
+          }
+        </div>
         <div class="textarea-container">
           <textarea
             id="saida-es"
@@ -85,6 +96,10 @@
   </section>
 
   <footer class="rodape-resultados">
-    <small class="dica-copia">Clique nas traduções acima para copiar.</small>
+
+
+    <div class="assinatura">
+      <small>Desenvolvido e mantido por: <a href="https://www.linkedin.com/in/dev-roger/" target="_blank" rel="noopener noreferrer" class="link-assinatura">Roger Fernandes</a></small>
+    </div>
   </footer>
 </main>
