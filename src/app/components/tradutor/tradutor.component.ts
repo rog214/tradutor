@@ -54,7 +54,7 @@ export class TradutorComponent {
 
   private extrairTextos(textoCompleto: string) {
     const linhas = textoCompleto.split('\n');
-    const itens: { prefixo: string, aspas: string, sufixo: string, ehFormatado: boolean }[] = [];
+    const itens: { prefixo: string, aspas: string, sufixo: string, ehFormatado: boolean, textoOriginal: string }[] = [];
     let textoUnificado = '';
     
     const regex = /^(\s*[^:]+:\s*)(['"])(.*?)\2(.*)$/;
@@ -66,7 +66,8 @@ export class TradutorComponent {
           prefixo: match[1],
           aspas: match[2],
           sufixo: match[4],
-          ehFormatado: true
+          ehFormatado: true,
+          textoOriginal: match[3]
         });
         textoUnificado += match[3] + '\n';
       } else {
@@ -74,7 +75,8 @@ export class TradutorComponent {
           prefixo: '',
           aspas: '',
           sufixo: '',
-          ehFormatado: false
+          ehFormatado: false,
+          textoOriginal: linha
         });
         textoUnificado += linha + '\n';
       }
@@ -89,7 +91,28 @@ export class TradutorComponent {
   private reconstruirTexto(traducaoBruta: string, itens: any[]): string {
     const linhasTraduzidas = traducaoBruta.split('\n');
     return itens.map((item, i) => {
-      const traduzido = linhasTraduzidas[i] !== undefined ? linhasTraduzidas[i] : '';
+      let traduzido = linhasTraduzidas[i] !== undefined ? linhasTraduzidas[i] : '';
+      
+      const originalTrimmed = item.textoOriginal ? item.textoOriginal.trimStart() : '';
+      const originalLimpo = item.textoOriginal ? item.textoOriginal.trim() : '';
+      const traduzidoTrimmed = traduzido.trimStart();
+      
+      const ignorarTraducao = originalLimpo.length === 1 || /^[A-Za-z]\/[A-Za-z]$/.test(originalLimpo);
+
+      if (ignorarTraducao) {
+        traduzido = item.textoOriginal;
+      } else if (originalTrimmed.length > 0 && traduzidoTrimmed.length > 0) {
+        const charInicial = originalTrimmed.charAt(0);
+        const charTraduzido = traduzidoTrimmed.charAt(0);
+        const espacosIniciais = traduzido.slice(0, traduzido.length - traduzidoTrimmed.length);
+        
+        if (charInicial === charInicial.toUpperCase() && charInicial !== charInicial.toLowerCase()) {
+          traduzido = espacosIniciais + charTraduzido.toUpperCase() + traduzidoTrimmed.slice(1);
+        } else if (charInicial === charInicial.toLowerCase() && charInicial !== charInicial.toUpperCase()) {
+          traduzido = espacosIniciais + charTraduzido.toLowerCase() + traduzidoTrimmed.slice(1);
+        }
+      }
+
       if (item.ehFormatado) {
         return `${item.prefixo}${item.aspas}${traduzido}${item.aspas}${item.sufixo}`;
       }
